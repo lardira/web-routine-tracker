@@ -1,13 +1,18 @@
-//      error, warn, success, log 
-const { red, yellow, green, white } = require('tiny-chalk');
-const { bold, underline } = require('tiny-chalk');
+const { red,    // error
+        yellow, // warn
+        green,  // success
+        white,  // log
+        inverse, 
+        bold,
+        underline 
+} = require('tiny-chalk');
 
 class debug{
     static isDebug = true;
 
     static error(string){
         if (this.isDebug)
-            console.error(red(bold(string)));
+            console.error(inverse(red(bold(string))));
     }
 
     static warn(string){
