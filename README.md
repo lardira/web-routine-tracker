@@ -1,0 +1,2 @@
+# web-thingies
+A project where I recreate several different modules for web applications and mix them up into one big thing (that's where the name comes from). Made just for practicing Node.js with no other intention in mind! 
