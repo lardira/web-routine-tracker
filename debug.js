@@ -3,20 +3,26 @@ const { red, yellow, green, white } = require('tiny-chalk');
 const { bold, underline } = require('tiny-chalk');
 
 class debug{
+    static isDebug = true;
+
     static error(string){
-        console.error(red(bold(string)));
+        if (this.isDebug)
+            console.error(red(bold(string)));
     }
 
     static warn(string){
-        console.warn(yellow(underline(string)));
+        if (this.isDebug)
+            console.warn(yellow(underline(string)));
     }
 
     static success(string){
-        console.log(green(string));
+        if (this.isDebug)
+            console.log(green(string));
     }
 
     static log(string){
-        console.log(white(string));
+        if (this.isDebug)
+            console.log(white(string));
     }
 }
 
