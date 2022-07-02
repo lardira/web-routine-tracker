@@ -1,0 +1,23 @@
+{
+  "name": "web-thingies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webThingies.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lardira/web-thingies.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lardira/web-thingies/issues"
+  },
+  "homepage": "https://github.com/lardira/web-thingies#readme",
+  "dependencies": {
+    "tiny-chalk": "^2.0.0",
+    "validator": "^13.7.0"
+  }
+}
