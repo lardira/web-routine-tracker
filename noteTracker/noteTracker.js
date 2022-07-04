@@ -16,7 +16,7 @@ class noteTracker{
 
     static #saveNotes(){
         try {
-            const savedNotes = this.readNotes();
+            const savedNotes = this.loadNotes();
             this.#notes = this.#notes.concat(savedNotes);
             fs.writeFileSync(defaultNotesPath, JSON.stringify(this.#notes));
             logger.success('Notes was saved successfully!');
@@ -27,17 +27,17 @@ class noteTracker{
     }
 
     static removeNote(id){
-        this.#notes = this.readNotes();
+        this.#notes = this.loadNotes();
         if (id >= 0 && id < this.#notes.length){
             this.#notes.splice(id, 1);
             fs.writeFileSync(defaultNotesPath, JSON.stringify(this.#notes));
             logger.success('The note was removed.');
         }
         else
-            logger.error('Index out of range');
+            logger.error('Index out of range.');
     }
 
-    static readNotes(path = defaultNotesPath){        
+    static loadNotes(path = defaultNotesPath){        
         if (path === '')
             path = defaultNotesPath;
             
@@ -50,7 +50,7 @@ class noteTracker{
     }
 
     static listNotes(){
-        this.#notes = this.readNotes();
+        this.#notes = this.loadNotes();
         logger.log(`Listing ${this.#notes.length} notes...`);
         
         let count = 0;
@@ -67,6 +67,19 @@ class noteTracker{
             logger.log(note.text);
             logger.log(`tag: ${note.tag}`);
         })
+    }
+
+    static readNote(id){
+        this.#notes = this.loadNotes();
+        if (id >= 0 && id < this.#notes.length){
+            const theNote = this.#notes[id];
+            logger.log(`№${id + 1}`);
+            logger.log(`'${theNote.title}'`);
+            logger.log(theNote.text);
+            logger.log(`tag: ${theNote.tag}`);
+        }
+        else
+            logger.error('Index out of range.');
     }
 }
 
