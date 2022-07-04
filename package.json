@@ -18,6 +18,7 @@
   "homepage": "https://github.com/lardira/web-thingies#readme",
   "dependencies": {
     "tiny-chalk": "^2.0.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "yargs": "^17.5.1"
   }
 }
