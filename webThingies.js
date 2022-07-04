@@ -1,6 +1,7 @@
 const yargs = require('yargs');
 const logger = require('./logger');
 const noteTracker = require('./noteTracker/noteTracker');
+const weatherTracker = require('./weatherTracker/weatherTracker');
 
 // Note Tracker Commands //
 //addNote command
