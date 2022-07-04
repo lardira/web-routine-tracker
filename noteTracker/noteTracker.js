@@ -51,12 +51,17 @@ class noteTracker{
     }
 
     static listNotes(){
-        let count = 0;
         this.#notes = this.readNotes();
         logger.log(`Listing ${this.#notes.length} notes...`);
+        
+        let count = 0;
         this.#notes.forEach((note) => {
-            logger.log(`Note №${++count}`);
-            logger.log(note);
+            const noteObject = JSON.parse(note);
+            
+            logger.log(`№${++count}`);
+            logger.log(`'${noteObject.title}'`);
+            logger.log(noteObject.text);
+            logger.log(`tag: ${noteObject.tag}`);
         })
     }
 }
