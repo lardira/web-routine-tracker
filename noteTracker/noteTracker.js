@@ -10,7 +10,7 @@ class noteTracker{
 
     static addNote(title, text, tag = 'simple'){
         const newNote = new note(title, text, tag);
-        this.#notes.push(JSON.stringify(newNote));
+        this.#notes.push(newNote);
         this.#saveNotes();
     }
 
@@ -43,8 +43,7 @@ class noteTracker{
             
         try {
             const bytes = fs.readFileSync(path);
-            const parsedBytes = JSON.parse(bytes);
-            return parsedBytes;
+            return JSON.parse(bytes);
         } catch (e) {
             return [];
         }
@@ -56,12 +55,17 @@ class noteTracker{
         
         let count = 0;
         this.#notes.forEach((note) => {
-            const noteObject = JSON.parse(note);
-            
+            /* 
+            template:
+                №0
+                'Title'
+                some text of the note, better be a big.
+                tag: tag
+            */
             logger.log(`№${++count}`);
-            logger.log(`'${noteObject.title}'`);
-            logger.log(noteObject.text);
-            logger.log(`tag: ${noteObject.tag}`);
+            logger.log(`'${note.title}'`);
+            logger.log(note.text);
+            logger.log(`tag: ${note.tag}`);
         })
     }
 }
