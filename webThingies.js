@@ -29,7 +29,6 @@ yargs.command({
     },
     handler: (argv) => { noteTracker.addNote(argv.title, argv.text, argv.tag) }
 })
-
 //removeNote command
 yargs.command({
     command: 'removeNote',
@@ -44,26 +43,27 @@ yargs.command({
     },
     handler: (argv) => { noteTracker.removeNote(argv.id) }
 })
-
-//readNotes command
-yargs.command({
-    command: 'readNotes',
-    describe: 'Reading notes.',
-    builder: {
-        path: { 
-            describe: 'Path where notes are stored.',
-            type: 'string',
-            default: ''
-        }
-    },
-    handler: (argv) => { noteTracker.readNotes(argv.path) }
-})
-
 //listNotes command
 yargs.command({
     command: 'listNotes',
     describe: 'Listing notes.',
     handler: () => { noteTracker.listNotes() }
 })
+//readNote command
+yargs.command({
+    command: 'readNote',
+    describe: 'Showing a specified note',
+    builder: {
+        id: {
+            demandOption: true,
+            describe: 'ID of the note',
+            type: 'number',
+            alias: 'i'
+        }
+    },
+    handler: (argv) => { noteTracker.readNote(argv.id) }
+})
 // !Note Tracker Commands //
-logger.log(`${yargs.argv._} was used.`);
+
+//parsing input commands
+yargs.parse();

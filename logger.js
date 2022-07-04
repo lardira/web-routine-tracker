@@ -18,36 +18,36 @@ class logger{
             console.error(red(bold('Provided level value is incorrect!')));
     }
 
-    static error(string, style = true){
+    static error(thing, style = true){
         if (this.#loggerLevel <= 3)
             if (style)
-                console.error(red(bold(string)));
+                console.error(red(bold(thing)));
             else
-                console.error(string);
+                console.error(thing);
     }
 
-    static warn(string, style = true){
+    static warn(thing, style = true){
         if (this.#loggerLevel <= 2)
             if (style)
-                console.warn(yellow(underline(string)));
+                console.warn(yellow(underline(thing)));
             else
-                console.warn(string);
+                console.warn(thing);
     }
 
-    static success(string, style = true){
+    static success(thing, style = true){
         if (this.#loggerLevel <= 1)
             if (style)
-                console.log(green(string));
+                console.log(green(thing));
             else
-                console.log(string);
+                console.log(thing);
     }
 
-    static log(string, style = true){
+    static log(thing, style = true){
         if (this.#loggerLevel === 0)
             if (style)
-                console.log(white(bold(string)));
+                console.log(white(bold(thing)));
             else
-                console.log(string);
+                console.log(thing);
     }
 
     static table(thing) {
