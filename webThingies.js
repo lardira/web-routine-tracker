@@ -66,4 +66,6 @@ yargs.command({
     handler: () => { noteTracker.listNotes() }
 })
 // !Note Tracker Commands //
-logger.log(`${yargs.argv._} was used.`);
+
+//parsing input commands
+yargs.parse();
