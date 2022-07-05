@@ -37,8 +37,10 @@ class weatherTracker{
                 logger.error(error);
                 return;
             } else if (response.body.error){
-                logger.error(response.body.error.code);
-                logger.error(response.body.error.message);
+                logger.error(
+                    response.body.error.code + '\n' +
+                    response.body.error.message
+                );
                 return;
             }
 
@@ -57,9 +59,11 @@ class weatherTracker{
                 logger.error(error);
                 return;
             } else if (response.body.error){
-                logger.error(response.body.error.code);
-                logger.error(response.body.error.type);
-                logger.error(response.body.error.info);
+                logger.error(
+                    response.body.error.code + '\n' + 
+                    response.body.error.type + '\n' + 
+                    response.body.error.info
+                );
                 return;
             }
             
@@ -67,11 +71,13 @@ class weatherTracker{
             const location = data.location;
             const weather = data.current;
 
-            logger.success(`${location.country}, ${location.region}, ${location.name}`)
-            logger.success(`At ${location.localtime} UTC${location.utc_offset}: `);
-            logger.success(`It's ${weather.weather_descriptions[0]}.`);
-            logger.success(`Temperature: ${weather.temperature} degrees, feels like ${weather.feelslike}`);
-            logger.success(`Wind: ${weather.wind_speed} km/h ${weather.wind_dir}`);
+            logger.success(
+                `${location.country}, ${location.region}, ${location.name}\n
+                At ${location.localtime} UTC${location.utc_offset}:\n
+                It's ${weather.weather_descriptions[0]}.\n
+                Temperature: ${weather.temperature} degrees, feels like ${weather.feelslike}\n
+                Wind: ${weather.wind_speed} km/h ${weather.wind_dir}`
+            );
         })
     }
 
