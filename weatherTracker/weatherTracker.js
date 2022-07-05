@@ -13,22 +13,23 @@ const readKey = (path) => {
 }
 
 //using positionstack API for geocoding
-const PosAccessKeyPath = 'positionstack_APIAccessKey.txt'; 
+const PosAccessKeyPath = 'weatherTracker/positionstack_APIAccessKey.txt'; 
 const PosAPIAccessKey = readKey(PosAccessKeyPath);
 const POS_API_URL = 'http://api.positionstack.com/';
 
 //using weatherstack API for weather data
-const AccessKeyPath = 'weatherstack_APIAccessKey.txt'; 
+const AccessKeyPath = 'weatherTracker/weatherstack_APIAccessKey.txt'; 
 const APIAccessKey = readKey(AccessKeyPath);
 const API_URL = 'http://api.weatherstack.com/';
 
 // Russia, Saint-Petersburg
 const defaultLatitude = '59.9375', defaultLongitude = '30.3086';
+const defaultCountry = 'Russia', defaultRegion = 'Saint-Petersburg';
 
 class weatherTracker{
-    static getCurrentByLocation(country = 'RU', region = 'Leningrad'){
+    static getCurrentByLocation(country = defaultCountry, region = defaultRegion){
         
-        const userQuery = `?access_key=${PosAPIAccessKey}&query=${region},${country}`;
+        const userQuery = `?access_key=${PosAPIAccessKey}&limit=1&query=${region},${country}`;
         const locationURL = POS_API_URL + 'v1/forward' + userQuery;
         
         postmanRequest({json: true, url: locationURL}, (error, response) => {
@@ -42,8 +43,7 @@ class weatherTracker{
             }
 
             const data = response.body.data;
-            
-            this.getCurrent(data.latitude, data.longitude);
+            this.getCurrent(data[0].latitude, data[0].longitude);
         })
     }
 
@@ -74,6 +74,11 @@ class weatherTracker{
             logger.success(`Wind: ${weather.wind_speed} km/h ${weather.wind_dir}`);
         })
     }
+
+    static getDefaultLatitude = () => defaultLatitude;
+    static getDefaultLongitude = () => defaultLongitude;
+    static getDefaultCountry = () => defaultCountry;
+    static getDefaultRegion = () => defaultRegion;
 }
 
 module.exports = weatherTracker;
