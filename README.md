@@ -14,7 +14,7 @@ A little app for keeping little notes. Notes can be tagged and managed by comman
 ### Weather Tracker
 #### Get the current weather in the specified location
 ```getWeatherInLocation --country _country-name_ --region _region-name_```
-#### Get the current weather in the specified location
+#### Get the current weather in the specified position
 ```getCurrentWeather (--latitude | --lat) _latitude_ (--longitude | --lon) _longitude_```
 ## Examples
 ### Note Tracker
