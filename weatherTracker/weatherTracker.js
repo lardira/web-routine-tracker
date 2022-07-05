@@ -18,17 +18,24 @@ const defaultLatitude = '59.9375', defaultLongitude = '30.3086';
 
 class weatherTracker{
     static getCurrentByLocation(country = 'RU', region = 'Leningrad'){
-
+        
         const userQuery = `?access_key=${PosAPIAccessKey}&query=${region},${country}`;
         const locationURL = POS_API_URL + 'v1/forward' + userQuery;
-
+        
         postmanRequest({json: true, url: locationURL}, (error, response) => {
+            if (error){
+                logger.error(error);
+                return;
+            } else if (response.body.error){
+                logger.error(response.body.error.code);
+                logger.error(response.body.error.message);
+                return;
+            }
+
             const data = response.body.data;
             
             this.getCurrent(data.latitude, data.longitude);
 
-            if (error)
-                logger.error(error);
         })
     }
 
@@ -38,6 +45,15 @@ class weatherTracker{
         const currentWeatherURL = API_URL + 'current' + userQuery;
 
         postmanRequest({json: true, url: currentWeatherURL}, (error, response) => {
+            if (error){
+                logger.error(error);
+                return;
+            } else if (response.body.error){
+                logger.error(response.body.error.code);
+                logger.error(response.body.error.type);
+                logger.error(response.body.error.info);
+                return;
+            }
             const data = response.body;
             const location = data.location;
             const weather = data.current;
@@ -48,8 +64,6 @@ class weatherTracker{
             logger.success(`Temperature: ${weather.temperature} degrees, feels like ${weather.feelslike}`);
             logger.success(`Wind: ${weather.wind_speed} km/h ${weather.wind_dir}`);
 
-            if (error)
-                logger.error(error);
         })
     }
 }
