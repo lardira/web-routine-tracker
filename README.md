@@ -18,4 +18,6 @@ A little app for keeping little notes. Notes can be tagged and managed by comman
 ```getCurrentWeather (--latitude | --lat) _latitude_ (--longitude | --lon) _longitude_```
 ## Examples
 ### Note Tracker
+![note_tracker_usage](/usage-examples/note-trackerExample.png?raw=true)
 ### Weather Tracker
+![weather_tracker_usage](/usage-examples/weather-trackerExample.png?raw=true)
