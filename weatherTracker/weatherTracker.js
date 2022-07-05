@@ -1,16 +1,25 @@
 const fs = require('fs');
 const postmanRequest = require('postman-request');
-const { showCompletionScript } = require('yargs');
 const logger = require('../logger');
+
+const readKey = (path) => {
+    try{
+        return fs.readFileSync(path);
+    }
+    catch(e){
+        logger.error(e);
+        return '';
+    }
+}
 
 //using positionstack API for geocoding
 const PosAccessKeyPath = 'positionstack_APIAccessKey.txt'; 
-const PosAPIAccessKey = fs.readFileSync(PosAccessKeyPath);
+const PosAPIAccessKey = readKey(PosAccessKeyPath);
 const POS_API_URL = 'http://api.positionstack.com/';
 
 //using weatherstack API for weather data
 const AccessKeyPath = 'weatherstack_APIAccessKey.txt'; 
-const APIAccessKey = fs.readFileSync(AccessKeyPath);
+const APIAccessKey = readKey(AccessKeyPath);
 const API_URL = 'http://api.weatherstack.com/';
 
 // Russia, Saint-Petersburg
@@ -35,7 +44,6 @@ class weatherTracker{
             const data = response.body.data;
             
             this.getCurrent(data.latitude, data.longitude);
-
         })
     }
 
@@ -54,6 +62,7 @@ class weatherTracker{
                 logger.error(response.body.error.info);
                 return;
             }
+            
             const data = response.body;
             const location = data.location;
             const weather = data.current;
@@ -63,7 +72,6 @@ class weatherTracker{
             logger.success(`It's ${weather.weather_descriptions[0]}.`);
             logger.success(`Temperature: ${weather.temperature} degrees, feels like ${weather.feelslike}`);
             logger.success(`Wind: ${weather.wind_speed} km/h ${weather.wind_dir}`);
-
         })
     }
 }
