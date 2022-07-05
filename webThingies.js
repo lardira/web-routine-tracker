@@ -1,6 +1,7 @@
 const yargs = require('yargs');
 const logger = require('./logger');
 const noteTracker = require('./noteTracker/noteTracker');
+const weatherTracker = require('./weatherTracker/weatherTracker');
 
 // Note Tracker Commands //
 //addNote command
@@ -64,6 +65,47 @@ yargs.command({
     handler: (argv) => { noteTracker.readNote(argv.id) }
 })
 // !Note Tracker Commands //
+
+// Weather Tracker Commands //
+//getWeatherInLocation command
+yargs.command({
+    command: 'getWeatherInLocation',
+    describe: 'Shows current weather in specified location. Country and city are specified.',
+    builder: {
+        country: {
+            describe: 'Country to look the weather in',
+            type: 'string',
+            default: weatherTracker.getDefaultCountry()
+        },
+        region: {
+            describe: 'Region to look the weather in',
+            type: 'string',
+            default: weatherTracker.getDefaultRegion()
+        }
+    },
+    handler: (argv) => { weatherTracker.getCurrentByLocation(argv.country, argv.region)}
+})
+//getCurrentWeather command
+yargs.command({
+    command: 'getCurrentWeather',
+    describe: 'Shows current weather in specified latitude and longitude',
+    builder: {
+        latitude: {
+            describe: 'Latitude of the location',
+            type: 'string',
+            alias: 'lat',
+            default: weatherTracker.getDefaultLatitude()
+        },
+        longitude: {
+            describe: 'Longitude of the location',
+            type: 'string',
+            alias: 'lon',
+            default: weatherTracker.getDefaultLongitude()
+        }
+    },
+    handler: (argv) => { weatherTracker.getCurrent(argv.latitude, argv.longitude)}
+})
+// !Weather Tracker Commands //
 
 //parsing input commands
 yargs.parse();
