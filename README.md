@@ -11,3 +11,11 @@ A little app for keeping little notes. Notes can be tagged and managed by comman
 ```readNote (--id | --i) _note-id_```
 #### List saved notes
 ```listNotes```
+### Weather Tracker
+#### Get the current weather in the specified location
+```getWeatherInLocation --country _country-name_ --region _region-name_```
+#### Get the current weather in the specified location
+```getCurrentWeather (--latitude | --lat) _latitude_ (--longitude | --lon) _longitude_```
+## Examples
+### Note Tracker
+### Weather Tracker
